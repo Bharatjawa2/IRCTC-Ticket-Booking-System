@@ -1,4 +1,4 @@
-package entities;
+package Ticket.entities;
 
 import java.util.Date;
 
