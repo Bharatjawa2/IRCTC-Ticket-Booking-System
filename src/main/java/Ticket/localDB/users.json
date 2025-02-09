@@ -1,27 +1,30 @@
 [
   {
     "user_id": "U1",
-    "name": "Bharat Jawa",
+    "password": "",
     "hashed_password": "te62t",
     "tickets_booked": [
       {
+        "ticket_id": "TICKET123",
+        "user_id": "U1",
         "source": "Bangalore",
         "destination": "Delhi",
-        "date_of_travel": "2025-02-21T18:30:00Z",
+        "date_of_travel": "2025-02-21",
         "train": {
           "train_id": "T1",
-          "train_no": 12460,
+          "train_no": "12460",
           "seats": [
-            [0,0,0,0,0,0],
-            [0,0,0,0,0,0],
-            [0,0,0,0,0,0],
-            [0,0,0,0,0,0]
+            [0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0]
           ],
-          "stations": {
+          "station_times": {
             "Bangalore": "13:50:00",
             "Jaipur": "15:50:30",
             "Delhi": "19:20:00"
-          }
+          },
+          "stations": ["Bangalore", "Jaipur", "Delhi"]
         }
       }
     ]

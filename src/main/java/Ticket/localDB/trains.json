@@ -13,11 +13,7 @@
       "Jaipur": "15:50:30",
       "Delhi": "19:20:00"
     },
-    "stations": [
-      "bangalore",
-      "jaipur",
-      "delhi"
-    ]
+    "stations": ["Bangalore", "Jaipur", "Delhi"]
   },
   {
     "train_id": "T2",
@@ -29,14 +25,10 @@
       [0,0,0,0,0,0]
     ],
     "station_times": {
-      "bangalore": "1:50:00",
-      "jaipur": "5:00:00",
-      "delhi": "8:30:00"
+      "Bangalore": "1:50:00",
+      "Jaipur": "5:00:00",
+      "Delhi": "8:30:00"
     },
-    "stations": [
-      "bangalore",
-      "jaipur",
-      "delhi"
-    ]
+    "stations": ["Bangalore", "Jaipur", "Delhi"]
   }
 ]
