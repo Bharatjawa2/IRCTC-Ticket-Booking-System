@@ -4,7 +4,7 @@
     "password": "",
     "hashed_password": "te62t",
     "tickets_booked": [
-      {
+      { 
         "ticket_id": "TICKET123",
         "user_id": "U1",
         "source": "Bangalore",
