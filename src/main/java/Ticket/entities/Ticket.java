@@ -1,20 +1,25 @@
 package Ticket.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.databind.PropertyNamingStrategies; // Fixed import
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
-import java.time.LocalDate; // Use LocalDate instead of String
+import java.time.LocalDate;
+import java.util.Objects;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class) // Fixed annotation
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class Ticket {
 
     private String ticketId;
     private String userId;
     private String source;
     private String destination;
-    private LocalDate dateOfTravel; // Changed from String to LocalDate
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private LocalDate dateOfTravel;
+
     private Train train;
 
     public Ticket() {}
@@ -29,7 +34,8 @@ public class Ticket {
     }
 
     public String getTicketInfo() {
-        return String.format("Ticket ID: %s belongs to User %s from %s to %s on %s", ticketId, userId, source, destination, dateOfTravel);
+        return String.format("Ticket ID: %s belongs to User %s from %s to %s on %s",
+                ticketId, userId, source, destination, dateOfTravel);
     }
 
     public String getTicketId() {
@@ -64,11 +70,14 @@ public class Ticket {
         this.destination = destination;
     }
 
-    public LocalDate getDateOfTravel() { // Changed return type to LocalDate
+    public LocalDate getDateOfTravel() {
         return dateOfTravel;
     }
 
-    public void setDateOfTravel(LocalDate dateOfTravel) { // Changed parameter type to LocalDate
+    public void setDateOfTravel(LocalDate dateOfTravel) {
+        if (dateOfTravel.isBefore(LocalDate.now())) {
+            throw new IllegalArgumentException("Date of travel cannot be in the past.");
+        }
         this.dateOfTravel = dateOfTravel;
     }
 
@@ -78,5 +87,24 @@ public class Ticket {
 
     public void setTrain(Train train) {
         this.train = train;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Ticket{ticketId='%s', userId='%s', source='%s', destination='%s', dateOfTravel=%s, train=%s}",
+                ticketId, userId, source, destination, dateOfTravel, train);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Ticket ticket = (Ticket) o;
+        return Objects.equals(ticketId, ticket.ticketId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(ticketId);
     }
 }

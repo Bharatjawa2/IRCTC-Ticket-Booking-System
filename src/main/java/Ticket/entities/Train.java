@@ -1,14 +1,15 @@
 package Ticket.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.databind.PropertyNamingStrategies; // Updated import
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class) // Updated annotation
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class Train {
 
     private String trainId;
@@ -27,24 +28,12 @@ public class Train {
         this.stations = stations;
     }
 
-    public List<String> getStations() {
-        return stations;
-    }
-
-    public List<List<Integer>> getSeats() {
-        return seats;
-    }
-
-    public void setSeats(List<List<Integer>> seats) {
-        this.seats = seats;
-    }
-
     public String getTrainId() {
         return trainId;
     }
 
-    public Map<String, String> getStationTimes() {
-        return stationTimes;
+    public void setTrainId(String trainId) {
+        this.trainId = trainId;
     }
 
     public String getTrainNo() {
@@ -55,12 +44,27 @@ public class Train {
         this.trainNo = trainNo;
     }
 
-    public void setTrainId(String trainId) {
-        this.trainId = trainId;
+    public List<List<Integer>> getSeats() {
+        return seats;
+    }
+
+    public void setSeats(List<List<Integer>> seats) {
+        if (seats == null || seats.isEmpty()) {
+            throw new IllegalArgumentException("Seats list cannot be null or empty.");
+        }
+        this.seats = seats;
+    }
+
+    public Map<String, String> getStationTimes() {
+        return stationTimes;
     }
 
     public void setStationTimes(Map<String, String> stationTimes) {
         this.stationTimes = stationTimes;
+    }
+
+    public List<String> getStations() {
+        return stations;
     }
 
     public void setStations(List<String> stations) {
@@ -68,6 +72,25 @@ public class Train {
     }
 
     public String getTrainInfo() {
-        return String.format("Train ID: %s Train No: %s", trainId, trainNo);
+        return String.format("Train ID: %s | Train No: %s", trainId, trainNo);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Train{trainId='%s', trainNo='%s', seats=%s, stationTimes=%s, stations=%s}",
+                trainId, trainNo, seats, stationTimes, stations);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Train train = (Train) o;
+        return Objects.equals(trainId, train.trainId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(trainId);
     }
 }
